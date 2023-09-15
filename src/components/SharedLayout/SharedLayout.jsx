@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 const SharedLayout = () => {
   return (
@@ -10,7 +11,9 @@ const SharedLayout = () => {
           <NavLink to="/movies">Movies</NavLink>
         </nav>
       </header>
-      <Outlet />
+      <Suspense fallback={<ScaleLoader color="#36d7b7" />}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };

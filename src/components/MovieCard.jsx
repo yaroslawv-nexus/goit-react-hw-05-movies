@@ -1,23 +1,6 @@
-import { getMovieForId } from 'API';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 
-const MovieCard = () => {
-  const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
-
-  useEffect(() => {
-    async function getMovieData() {
-      try {
-        const movieData = await getMovieForId(movieId);
-        setMovie(movieData.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getMovieData();
-  }, [movieId]);
-
+const MovieCard = ({ movie }) => {
   const { title, genres, vote_average, overview, release_date, backdrop_path } =
     movie;
 
