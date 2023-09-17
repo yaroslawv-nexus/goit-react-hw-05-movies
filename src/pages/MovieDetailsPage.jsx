@@ -17,15 +17,21 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
+    const controller = new AbortController();
     async function getMovieData() {
       try {
-        const movieData = await getMovieForId(movieId);
+        const movieData = await getMovieForId(movieId, controller);
         setMovie(movieData.data);
       } catch (error) {
-        console.log(error);
+        if (error.code !== 'ERR_CANCELED') {
+          console.log(error);
+        }
       }
     }
     getMovieData();
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (

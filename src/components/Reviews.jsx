@@ -7,15 +7,23 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function getCastData() {
       try {
-        const data = await getReviewsForId(movieId);
+        const data = await getReviewsForId(movieId, controller);
         setReviews(data.data.results);
       } catch (error) {
-        console.log(error);
+        if (error.code !== 'ERR_CANCELED') {
+          console.log(error);
+        }
       }
     }
     getCastData();
+
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (

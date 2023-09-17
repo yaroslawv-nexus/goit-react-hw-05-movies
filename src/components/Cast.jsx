@@ -7,15 +7,23 @@ const Cast = () => {
   const [cast, setCast] = useState([]);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function getCastData() {
       try {
-        const data = await getActorsForId(movieId);
+        const data = await getActorsForId(movieId, controller);
         setCast(data.data.cast);
       } catch (error) {
-        console.log(error);
+        if (error.code !== 'ERR_CANCELED') {
+          console.log(error);
+        }
       }
     }
     getCastData();
+
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (

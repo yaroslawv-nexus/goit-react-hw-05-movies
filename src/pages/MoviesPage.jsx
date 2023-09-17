@@ -11,20 +11,28 @@ const Movies = () => {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function findFilm() {
       if (params.get('query')) {
         try {
           setfindedFilm([]);
           setLoader(true);
-          const data = await getMovieForSearch(params.get('query'));
+          const data = await getMovieForSearch(params.get('query'), controller);
           setfindedFilm(data.data.results);
           setLoader(false);
         } catch (error) {
-          console.log(error);
+          if (error.code !== 'ERR_CANCELED') {
+            console.log(error);
+          }
         }
       }
     }
     findFilm();
+
+    return () => {
+      controller.abort();
+    };
   }, [params]);
 
   const onSubmitSearch = async e => {

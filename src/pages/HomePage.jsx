@@ -8,17 +8,25 @@ const Home = () => {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function getTrends() {
       try {
         setLoader(true);
-        const trendsData = await getTrend();
+        const trendsData = await getTrend(controller);
         setTrends(trendsData.data.results);
         setLoader(false);
       } catch (error) {
-        console.log(error);
+        if (error.code !== 'ERR_CANCELED') {
+          console.log(error);
+        }
       }
     }
     getTrends();
+
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return (
