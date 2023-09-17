@@ -1,7 +1,8 @@
 import { getTrend } from 'API';
-import MovieList from 'components/MovieList';
+import MovieList from 'components/MovieList/MovieList';
 import React, { useEffect, useState } from 'react';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import { HomeTitle } from './HomePage.styled';
 
 const Home = () => {
   const [trends, setTrends] = useState([]);
@@ -31,6 +32,7 @@ const Home = () => {
 
   return (
     <div>
+      <HomeTitle>Trending Today</HomeTitle>
       <MovieList movies={trends} />
       {loader && <ScaleLoader color="#36d7b7" />}
     </div>

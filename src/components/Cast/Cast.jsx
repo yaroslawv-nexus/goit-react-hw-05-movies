@@ -1,6 +1,7 @@
 import { getActorsForId } from 'API';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { CastList, CastItem, CastImg, CastName } from './Cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -27,18 +28,18 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <ul>
+    <CastList>
       {cast.map(({ name, profile_path, id }) => (
-        <li key={id}>
-          <h3>{name}</h3>
-          <img
+        <CastItem key={id}>
+          <CastName>{name}</CastName>
+          <CastImg
             src={`https://image.tmdb.org/t/p/w500${profile_path}`}
             alt={name}
             width="80"
           />
-        </li>
+        </CastItem>
       ))}
-    </ul>
+    </CastList>
   );
 };
 

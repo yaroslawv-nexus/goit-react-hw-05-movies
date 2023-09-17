@@ -1,8 +1,9 @@
 import { getMovieForSearch } from 'API';
-import MovieList from 'components/MovieList';
+import MovieList from 'components/MovieList/MovieList';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import { MovieSearch, MovieSearchButton } from './MoviesPage.styled';
 
 const Movies = () => {
   const [params, setParams] = useSearchParams();
@@ -44,14 +45,14 @@ const Movies = () => {
   return (
     <div>
       <form onSubmit={onSubmitSearch}>
-        <input
+        <MovieSearch
           type="text"
           onChange={e => {
             setSearchWord(e.target.value);
           }}
           value={searchWord}
         />
-        <button type="submit">Search</button>
+        <MovieSearchButton type="submit">Search</MovieSearchButton>
       </form>
       {findedFilm.length !== 0 && <MovieList movies={findedFilm} />}
       {loader && <ScaleLoader color="#36d7b7" />}

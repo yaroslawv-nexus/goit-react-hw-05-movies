@@ -1,13 +1,14 @@
 import React from 'react';
-import MovieListItem from './MovieListItem';
+import MovieListItem from '../MovieListItem/MovieListItem';
+import { ListStyled } from './MovieList.styled';
 
 const MovieList = ({ movies }) => {
   return (
-    <ul>
+    <ListStyled>
       {movies.map(({ title, id }) => (
         <MovieListItem title={title} id={id} key={id} />
       ))}
-    </ul>
+    </ListStyled>
   );
 };
 

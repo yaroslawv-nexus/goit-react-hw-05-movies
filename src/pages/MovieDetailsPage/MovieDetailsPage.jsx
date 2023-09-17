@@ -1,5 +1,5 @@
 import { getMovieForId } from 'API';
-import MovieCard from 'components/MovieCard';
+import MovieCard from 'components/MovieCard/MovieCard';
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import {
   Outlet,
@@ -9,6 +9,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import ScaleLoader from 'react-spinners/ScaleLoader';
+import { SubLink } from './MovieDetailsPage.styled';
 
 const MovieDetails = () => {
   const location = useLocation();
@@ -40,8 +41,8 @@ const MovieDetails = () => {
       {Object.getOwnPropertyNames(movie).length !== 0 && (
         <MovieCard movie={movie} />
       )}
-      <NavLink to="cast">Cast</NavLink>
-      <NavLink to="reviews">Review</NavLink>
+      <SubLink to="cast">Cast</SubLink>
+      <SubLink to="reviews">Review</SubLink>
       <Suspense fallback={<ScaleLoader color="#36d7b7" />}>
         <Outlet />
       </Suspense>

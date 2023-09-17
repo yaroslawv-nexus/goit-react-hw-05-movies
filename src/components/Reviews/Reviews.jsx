@@ -1,6 +1,12 @@
 import { getReviewsForId } from 'API';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import {
+  ReviewsList,
+  ReviewItem,
+  ReviewAuthor,
+  ReviewContent,
+} from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -27,14 +33,16 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <ul>
-      {reviews.map(({ author, content, id }) => (
-        <li key={id}>
-          <h3>{author}</h3>
-          <p>{content}</p>
-        </li>
-      ))}
-    </ul>
+    <ReviewsList>
+      {reviews.length > 0 &&
+        reviews.map(({ author, content, id }) => (
+          <ReviewItem key={id}>
+            <ReviewAuthor>{author}</ReviewAuthor>
+            <ReviewContent>{content}</ReviewContent>
+          </ReviewItem>
+        ))}
+      {reviews.length === 0 && <b>Reviews not fiend</b>}
+    </ReviewsList>
   );
 };
 
