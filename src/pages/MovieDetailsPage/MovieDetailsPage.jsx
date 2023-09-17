@@ -31,7 +31,7 @@ const MovieDetails = () => {
 
   return (
     <div>
-      <Link to={locationBackRef.current}>Go back</Link>
+      <SubLink to={locationBackRef.current}>Go back</SubLink>
       {Object.getOwnPropertyNames(movie).length !== 0 && (
         <MovieCard movie={movie} />
       )}
