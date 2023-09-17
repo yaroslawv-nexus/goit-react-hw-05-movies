@@ -1,13 +1,7 @@
 import { getMovieForId } from 'API';
 import MovieCard from 'components/MovieCard/MovieCard';
 import React, { Suspense, useEffect, useRef, useState } from 'react';
-import {
-  Outlet,
-  NavLink,
-  Link,
-  useLocation,
-  useParams,
-} from 'react-router-dom';
+import { Outlet, Link, useLocation, useParams } from 'react-router-dom';
 import ScaleLoader from 'react-spinners/ScaleLoader';
 import { SubLink } from './MovieDetailsPage.styled';
 
