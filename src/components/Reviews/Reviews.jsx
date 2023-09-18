@@ -33,16 +33,17 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <ReviewsList>
-      {reviews.length > 0 &&
-        reviews.map(({ author, content, id }) => (
+    <>
+      <ReviewsList>
+        {reviews.map(({ author, content, id }) => (
           <ReviewItem key={id}>
             <ReviewAuthor>{author}</ReviewAuthor>
             <ReviewContent>{content}</ReviewContent>
           </ReviewItem>
         ))}
+      </ReviewsList>
       {reviews.length === 0 && <b>Reviews not fiend</b>}
-    </ReviewsList>
+    </>
   );
 };
 
